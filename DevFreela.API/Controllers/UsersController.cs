@@ -1,14 +1,12 @@
 ﻿using DevFreela.API.Models;
+using DevFreela.Application.InputModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevFreela.API.Controllers
 {
     [Route("api/users")]
     public class UsersController : ControllerBase
-    {
-        public UsersController(ExempleClass exempleClass) 
-        {
-        }
+    { 
         [HttpGet("{id}")]
         public  IActionResult GetById (int id)
         {
@@ -17,16 +15,16 @@ namespace DevFreela.API.Controllers
 
 
         [HttpPost]
-        public IActionResult Post([FromBody] CreateUserModel createUserModel)
+        public IActionResult Post([FromBody] CreateUserInputModel inputModel)
         {
-            return CreatedAtAction(nameof(GetById), new { id = 1}, createUserModel);
+            return CreatedAtAction(nameof(GetById), new { id = 1}, inputModel);
         }
 
-        // api/Users/1/login
-        [HttpPut("{id}/login")]
-        public IActionResult login(int id, [FromBody] LoginModel loginModel)
-        {
-            return NoContent();
-        }
+        //// api/users/1/login
+        //[httpput("{id}/login")]
+        //public iactionresult login(int id, [frombody] loginmodel inputmodel)
+        //{
+        //    return nocontent();
+        //}
     }
 }

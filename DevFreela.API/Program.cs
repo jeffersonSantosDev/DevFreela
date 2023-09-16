@@ -1,4 +1,7 @@
 using DevFreela.API.Models;
+using DevFreela.Application.Services.Implementations;
+using DevFreela.Application.Services.Interfaces;
+using DevFreela.infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.Configure<OpeningTimeOption>(builder.Configuration.GetSection("OpeningTime"));
-builder.Services.AddScoped<ExempleClass>(e => new ExempleClass { Name = "Initial Stage" });
+builder.Services.AddSingleton<DevFreelaDbContext>();
+builder.Services.AddScoped<IProjectServices, ProjectServices>();
 
 var app = builder.Build();
 
